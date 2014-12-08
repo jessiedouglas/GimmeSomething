@@ -10,10 +10,11 @@
     this.route("/curry", "indian");
     this.route("/burgers", "burgers");
     this.route("/spaghetti", "italian");
-    this.route("/waffles", "diner");
-    this.route("/cookies", "bakery");
+    this.route("/waffles", "diners");
+    this.route("/cookies", "bakeries");
     this.route("/ice_cream", "ice cream");
-    this.route("/beer", "bar");
+    this.route("/beer", "bars");
+    this.route("/anything", "restaurants");
 
     window.addEventListener("hashchange", this.switchPage.bind(this));
     window.addEventListener("load", this.switchPage.bind(this));
@@ -27,7 +28,7 @@
 
   Router.prototype.switchPage = function () {
     $main = $("#main");
-    var url = location.hash.slice(1) || "/pizza";
+    var url = location.hash.slice(1) || "/";
 
     var route = this.routes[url] || {};
 
