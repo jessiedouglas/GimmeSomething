@@ -14,10 +14,12 @@
     this.route("/cookies", "bakeries");
     this.route("/ice_cream", "ice cream");
     this.route("/beer", "bars");
+    this.route("/coffee", "cafes");
     this.route("/anything", "restaurants");
 
     window.addEventListener("hashchange", this.switchPage.bind(this));
     window.addEventListener("load", this.switchPage.bind(this));
+    this.$el.on("click", "#search", this.search.bind(this));
   };
 
   Router.prototype.route = function (path, searchTerm) {
@@ -29,6 +31,7 @@
   Router.prototype.switchPage = function () {
     $main = $("#main");
     var url = location.hash.slice(1) || "/";
+    this.currentRoute = url;
 
     var route = this.routes[url] || {};
 
