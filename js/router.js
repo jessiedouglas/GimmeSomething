@@ -38,6 +38,8 @@
 
     if (this.$el && route.searchTerm) {
       this.$el.html(GimmeSomething.beforeSearchTemplate(url));
+    } else {
+      this.$el.html(GimmeSomething.pageNotFound());
     }
   };
 })();

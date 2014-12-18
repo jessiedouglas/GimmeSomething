@@ -64,9 +64,43 @@
     };
 
     var node = document.getElementById("map_results");
-    service = new google.maps.places.PlacesService(node);
-    service.textSearch(request, function (resp) {
-      debugger
-    });
+    var service = new google.maps.places.PlacesService(node);
+    service.textSearch(request, this.parseSearch.bind(this));
+  };
+
+  GimmeSomething.Controller.prototype.parseSearch = function (resp) {
+    var info = {
+      name: resp[0].name,
+      address: resp[0].formatted_address,
+      id: resp[0].place_id
+    };
+
+    this.renderSearch(info);
+  };
+
+  GimmeSomething.Controller.prototype.renderSearch = function (info) {
+    var name = info.name;
+    var address = info.address;
+
+    var request = {
+      placeId: info.id
+    };
+
+    var node = document.getElementById("map_results");
+    var service = new google.maps.places.PlacesService(node);
+
+    service.getDetails(request, function (place, status) {
+      if (status == "OK") {
+        var results = {
+          phone: place.formatted_phone_number,
+          website: place.website
+        };
+      } else {
+        var results = {};
+      }
+
+      this.$el.find("a#search").remove();
+      this.$el.append(GimmeSomething.searchResultsTemplate(name, address, results));
+    }.bind(this));
   };
 })();
