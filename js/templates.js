@@ -14,15 +14,16 @@
 
     var html =
       '<h1>GIMME ' + headerWord + '</h1>\
-      <p>Find ' + params.description + ' near you</p>'
+      <p>Find ' + params.description + ' near you</p>\
+      <ul class="errors"></ul>'
 
-    var locationForm =
-      '<label for="position">Where are you?</label>\
-      <input type="text" id="position" placeholder="Enter a street address or zip code">\
-      <button id="position">Submit</button>';
+    var locationForm = GimmeSomething.locationTemplate();
 
     var hasLocation =
-      '<p>You are in ' + GimmeSomething.address + '</p>'
+      '<div class="location">\
+      <p>Your current location: ' + GimmeSomething.address + '</p>\
+      <a href="" id="change_location">change</a>\
+      </div>'
       + '<a href="#" id="search">GO!</a>';
 
     if (GimmeSomething.address) {
@@ -32,9 +33,18 @@
     }
   };
 
-  GimmeSomething.searchResultsTemplate = function (name, address, info) {
+  GimmeSomething.locationTemplate = function () {
+    var html = '<label for="position">Where are you?</label>\
+      <input type="text" id="position" placeholder="Enter a street address or zip code">\
+      <button id="position">Submit</button>';
+
+    return html;
+  };
+
+  GimmeSomething.searchResultsTemplate = function (name, info) {
     var website = info.website;
     var phone = info.phone;
+    var address = info.address;
     var mapsUrl = "http://www.google.com/maps/place/" + address.split(" ").join("+");
 
     var formattedName = '<h3 class="name">' + name + '</h3>'
