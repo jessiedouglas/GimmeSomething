@@ -35,7 +35,6 @@
   };
 
   GimmeSomething.getPreviousLocation = function () {
-    debugger
     return GimmeSomething.readCookie("location");
   };
 

@@ -23,6 +23,8 @@
       data: data,
       type: "GET",
       success: function (resp) {
+        this.$el.find("ul.errors").empty();
+
         if (resp.status != "OK") {
           var error = '<li>Unable to find location. Please try again.</li>'
           this.$el.find("ul.errors").append(error)
