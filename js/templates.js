@@ -1,6 +1,13 @@
 ;(function () {
   var GimmeSomething = window.GimmeSomething = window.GimmeSomething || {};
 
+  GimmeSomething.homeTemplate = function () {
+    html = '<h1>GIMME SOMETHING</h1>\
+          <p>For the indecisive.</p>';
+
+    return html;
+  };
+
   GimmeSomething.beforeSearchTemplate = function (url) {
     var params = GimmeSomething.router.routes[url];
     var headerWord = GimmeSomething.currentRoute.toUpperCase().split("_").join(" ");

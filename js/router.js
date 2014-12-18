@@ -5,6 +5,7 @@
     this.$el = $(el);
     this.routes = {};
 
+    this.route("/", "home");
     this.route("/pizza", "pizza");
     this.route("/tacos", "mexican", "Mexican food");
     this.route("/sushi", "sushi");
@@ -37,7 +38,11 @@
     var route = this.routes[url] || {};
 
     if (this.$el && route.searchTerm) {
-      this.$el.html(GimmeSomething.beforeSearchTemplate(url));
+      if (route.searchTerm == "home") {
+        this.$el.html(GimmeSomething.homeTemplate());
+      } else {
+        this.$el.html(GimmeSomething.beforeSearchTemplate(url));
+      }
     } else {
       this.$el.html(GimmeSomething.pageNotFound());
     }
