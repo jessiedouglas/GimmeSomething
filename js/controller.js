@@ -28,6 +28,7 @@
           this.$el.find("ul.errors").append(error)
         } else {
           GimmeSomething.address = resp.results[0].formatted_address;
+          GimmeSomething.storeLocation(GimmeSomething.address);
           this.coords = resp.results[0].geometry.location;
           GimmeSomething.router.renderPage();
         }
@@ -117,7 +118,7 @@
   GimmeSomething.Controller.prototype.changeLocation = function (event) {
     event.preventDefault();
 
-    GimmeSomething.address = undefined;
+    GimmeSomething.eraseLocation();
     GimmeSomething.router.renderPage();
   };
 })();

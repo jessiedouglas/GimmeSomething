@@ -30,6 +30,7 @@
 
   <script src="js/jquery-1.11.1.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <script src="js/cookies.js"></script>
   <script src="js/router.js"></script>
   <script src="js/controller.js"></script>
   <script src="js/templates.js"></script>
@@ -37,6 +38,7 @@
     $(function () {
       GimmeSomething.router = new GimmeSomething.Router(document.getElementById("main"));
       GimmeSomething.controller = new GimmeSomething.Controller(document.getElementById("main"));
+      GimmeSomething.address = GimmeSomething.getPreviousLocation();
     });
   </script>
 </body>
