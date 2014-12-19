@@ -41,7 +41,9 @@
   };
 
   GimmeSomething.Controller.prototype.getCoords = function (event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     if ($("input#position").length > 0) {
       var place = $("input#position").val();
@@ -84,7 +86,7 @@
     event.preventDefault();
 
     if (!this.coords) {
-      this.getCoords(event);
+      this.getCoords();
     }
 
     var lat = this.coords.lat;
