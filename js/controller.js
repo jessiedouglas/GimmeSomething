@@ -89,31 +89,33 @@
       this.getCoords();
     }
 
-    var lat = this.coords.lat;
-    var lng = this.coords.lng;
-    var location = new google.maps.LatLng(lat, lng);
-    var keyword = GimmeSomething.router.routes["/" + GimmeSomething.currentRoute].searchTerm;
+    setTimeout(function () {
+      var lat = this.coords.lat;
+      var lng = this.coords.lng;
+      var location = new google.maps.LatLng(lat, lng);
+      var keyword = GimmeSomething.router.routes["/" + GimmeSomething.currentRoute].searchTerm;
 
-    if (keyword === "bars") {
-      var types = ["bar", "food"];
-    } else if (keyword === "cafes") {
-      var types = ["cafe", "food"];
-    } else {
-      var types = ["restaurant", "food"];
-    }
+      if (keyword === "bars") {
+        var types = ["bar", "food"];
+      } else if (keyword === "cafes") {
+        var types = ["cafe", "food"];
+      } else {
+        var types = ["restaurant", "food"];
+      }
 
-    var request = {
-      keyword: keyword,
-      location: location,
-      radius: '10000',
-      types: types,
-      opennow: true,
-      rankby: google.maps.places.RankBy.DISTANCE
-    };
+      var request = {
+        keyword: keyword,
+        location: location,
+        radius: '10000',
+        types: types,
+        opennow: true,
+        rankby: google.maps.places.RankBy.DISTANCE
+      };
 
-    var node = document.getElementById("map_results");
-    var service = new google.maps.places.PlacesService(node);
-    service.nearbySearch(request, this.parseSearch.bind(this));
+      var node = document.getElementById("map_results");
+      var service = new google.maps.places.PlacesService(node);
+      service.nearbySearch(request, this.parseSearch.bind(this));
+    }, 0);
   };
 
   GimmeSomething.Controller.prototype.parseSearch = function (resp, status) {
