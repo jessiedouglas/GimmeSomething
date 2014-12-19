@@ -43,7 +43,12 @@
   GimmeSomething.Controller.prototype.getCoords = function (event) {
     event.preventDefault();
 
-    var place = $("input#position").val();
+    if ($("input#position").length > 0) {
+      var place = $("input#position").val();
+    } else {
+      var place = this.address;
+    }
+
     var url = "https://maps.googleapis.com/maps/api/geocode/json?"
     var data = {
       address: place
@@ -77,6 +82,10 @@
 
   GimmeSomething.Controller.prototype.search = function (event) {
     event.preventDefault();
+
+    if (!this.coords) {
+      this.getCoords(event);
+    }
 
     var lat = this.coords.lat;
     var lng = this.coords.lng;
