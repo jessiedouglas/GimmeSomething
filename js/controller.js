@@ -76,7 +76,9 @@
 
   GimmeSomething.Controller.prototype.parseSearch = function (resp, status) {
     if (resp.length === 0) {
-      var html = '<p>There are no open locations near you :(</p>';
+      var html = '<div class="results">\
+                  <p>There are no open locations near you :(</p>\
+                  </div>';
 
       this.$el.find("a#search").remove();
       this.$el.append(html);

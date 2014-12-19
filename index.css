@@ -1,0 +1,202 @@
+/* RESET */
+html, head, body, section, ul, li, a, p, h1, h3, h5, label, div, span {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  text-align: baseline;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  text-decoration: none;
+}
+
+button, input {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  text-align: baseline;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  text-decoration: none;
+  -webkit-appearance: none;
+  display: inline-block;
+  box-sizing: content-box;
+  width: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* HEADER */
+section.header {
+  width: 100%
+}
+
+section.header > ul {
+  width: 1000px;
+  margin: 0 auto;
+  border: 1px solid orange;
+}
+
+section.header > ul > li {
+  float: left;
+}
+
+section.header > ul > li > a {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 11px;
+  margin: 5px 0;
+  transition: padding 0.2s;
+}
+
+section.header > ul > li:not(:last-child) > a {
+  border-right: 1px solid orange;
+}
+
+section.header > ul > li:hover > a {
+  padding: 0px 11px 10px 11px;
+}
+
+/* MAIN */
+
+section#main {
+  width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 100px 0;
+}
+
+section#main > h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+}
+
+section#main > p {
+  font-size: 25px;
+}
+
+ul.errors {
+
+}
+
+ul.errors > li {
+
+}
+
+/* location form */
+div.location {
+  width: 600px;
+  border: 1px solid orange;
+  margin: 20px auto;
+  font-size: 14px;
+}
+
+div.location > label {
+  font-weight: bold;
+}
+
+div.location > input {
+  width: 300px;
+  padding: 3px 10px;
+}
+
+div.location > button {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+div.location > button:hover {
+
+}
+/* location info */
+div.location > p {
+  padding: 0 70px;
+  float: left;
+}
+
+div.location > p > span {
+  font-weight: bold;
+  padding-right: 20px;
+}
+
+div.location > a {
+  float: left;
+  color: blue;
+  font-size: 12px;
+  text-decoration: underline;
+  padding: 0 10px;
+}
+
+div.location > a:hover {
+
+}
+
+/* results */
+div.results {
+  padding: 50px 0;
+}
+
+div.results > a.name {
+
+}
+
+div.results > a.name:hover {
+
+}
+
+div.results h3 {
+  font-size: 60px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+div.results > span {
+  font-size: 20px;
+  padding: 10px 0;
+}
+
+div.results > h5 {
+  font-size: 20px;
+  padding: 10px 0;
+}
+
+div.results > a:last-child {
+  color: blue;
+  text-decoration: underline;
+  padding: 20px 0;
+}
+
+div.results > a:last-child:hover {
+
+}
+
+div.results > p {
+  font-size: 30px;
+}
+
+/*HOME LINK*/
+nav.home {
+  width: 1000px;
+  margin: 50px auto;
+}
+
+nav.home > a {
+  display: block;
+  text-decoration: underline;
+}
