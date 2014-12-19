@@ -7,6 +7,37 @@
     this.$el.on("click", "button#position", this.getCoords.bind(this));
     this.$el.on("click", "#search", this.search.bind(this));
     this.$el.on("click", "#change_location", this.changeLocation.bind(this));
+    this.$el.on("click", "a.why", this.whyTab.bind(this));
+    this.$el.on("click", "a.acknowledgements", this.acknowledgementsTab.bind(this));
+  };
+
+  GimmeSomething.Controller.prototype.whyTab = function (event) {
+    event.preventDefault();
+
+    if (this.currentTab !== "why") {
+      this.$el.find("div.tabs").html(GimmeSomething.whyTemplate());
+      this.currentTab = "why";
+      this.switchTabs();
+    }
+  };
+
+  GimmeSomething.Controller.prototype.acknowledgementsTab = function (event) {
+    event.preventDefault();
+
+    if (this.currentTab !== "acknowledgements") {
+      this.$el.find("div.tabs").html(GimmeSomething.acknowledgementsTemplate());
+      this.currentTab = "acknowledgements";
+      this.switchTabs();
+    }
+  };
+
+  GimmeSomething.Controller.prototype.switchTabs = function () {
+    var page = this.$el.find("div.tabs > div");
+    page.addClass("transitioning");
+
+    setTimeout(function () {
+      page.removeClass("transitioning").addClass("active");;
+    }, 0);
   };
 
   GimmeSomething.Controller.prototype.getCoords = function (event) {

@@ -91,12 +91,61 @@ section#main > p {
   font-size: 25px;
 }
 
+section#main > ul {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+section#main > ul > li {
+  float: left;
+}
+
+section#main > ul > li > a {
+  display: block;
+  text-decoration: underline;
+  padding: 0 60px;
+  font-size: 14px
+}
+
 ul.errors {
 
 }
 
 ul.errors > li {
 
+}
+
+/* tabs */
+div.tabs {
+  overflow: hidden;
+  width: 400px;
+  padding-top: 50px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+div.tabs h3 {
+  font-weight: bold;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+div.tabs p {
+  padding-bottom: 10px;
+}
+
+div.tabs a {
+  text-decoration: underline;
+}
+
+div.active {
+  margin-top: 0;
+  transition: margin-top 0.5s;
+}
+
+div.transitioning {
+  margin-top: -400px;
 }
 
 /* location form */

@@ -4,9 +4,9 @@
   GimmeSomething.homeTemplate = function () {
     html = '<h1>GIMME SOMETHING</h1>\
           <p>For the indecisive.</p>\
-          <ul>\
+          <ul class="group">\
             <li><a href="" class="why">Why?</a></li>\
-            <li><a href="" class="acknowledgments">Acknowledgments</a></li>\
+            <li><a href="" class="acknowledgements">Acknowledgements</a></li>\
           </ul>\
           <div class="tabs"></div>';
 
@@ -14,16 +14,16 @@
   };
 
   GimmeSomething.whyTemplate = function () {
-      var html = '<h3>Why?</h3>\
+      var html = '<div><h3>Why?</h3>\
                   <p>You know those times when you\'re sitting around with your\
-                    friends and you just can\'t decide where to eat?</p>\
-                  <p>This is for those times.</p>';
+                    friends, and you just can\'t decide where to eat?</p>\
+                  <p>This is for those times.</p></div>';
 
       return html;
   };
 
-  GimmeSomething.acknowledgmentsTemplate = function () {
-      var html = '<h3>Acknowledgments</h3>\
+  GimmeSomething.acknowledgementsTemplate = function () {
+      var html = '<div><h3>Acknowledgements</h3>\
             <p>Special thanks to \
             <a target="_blank" href="http://thenounproject.com">The Noun Project</a>\
              artists: </p>\
@@ -67,7 +67,7 @@
               <li>"Coffee" by \
                   <a target="_blank" href="http://thenounproject.com/Ilsur/">\
                     Ilsur Aptukov</a></li>\
-              </ul>';
+              </ul></div>';
 
       return html;
   };
