@@ -115,7 +115,7 @@
       var node = document.getElementById("map_results");
       var service = new google.maps.places.PlacesService(node);
       service.nearbySearch(request, this.parseSearch.bind(this));
-    }, 0);
+    }.bind(this), 0);
   };
 
   GimmeSomething.Controller.prototype.parseSearch = function (resp, status) {
