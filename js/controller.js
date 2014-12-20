@@ -106,10 +106,9 @@
       var request = {
         keyword: keyword,
         location: location,
-        radius: '10000',
         types: types,
         opennow: true,
-        rankby: google.maps.places.RankBy.DISTANCE
+        rankBy: google.maps.places.RankBy.DISTANCE
       };
 
       var node = document.getElementById("map_results");
