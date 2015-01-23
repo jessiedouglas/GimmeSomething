@@ -48,7 +48,7 @@ section.header {
 section.header > ul {
   width: 1000px;
   margin: 0 auto;
-  border: 1px solid orange;
+  border: 1px solid gray;
 }
 
 section.header > ul > li {
@@ -65,7 +65,7 @@ section.header > ul > li > a {
 }
 
 section.header > ul > li:not(:last-child) > a {
-  border-right: 1px solid orange;
+  border-right: 1px solid gray;
 }
 
 section.header > ul > li:hover > a {
@@ -150,8 +150,7 @@ div.transitioning {
 
 /* location form */
 div.location {
-  width: 600px;
-  border: 1px solid orange;
+	display: inline-block;
   margin: 20px auto;
   font-size: 14px;
 }
@@ -175,8 +174,8 @@ div.location > button:hover {
 }
 /* location info */
 div.location > p {
-  padding: 0 70px;
   float: left;
+	text-align: center;
 }
 
 div.location > p > span {
@@ -189,16 +188,39 @@ div.location > a {
   color: blue;
   font-size: 12px;
   text-decoration: underline;
-  padding: 0 10px;
+  padding-left: 20px;
 }
 
 div.location > a:hover {
 
 }
 
+a#search {
+	display: block;
+	width: 20px;
+	text-align: center;
+	margin: 0 auto;
+	padding: 7px 25px 7px 15px;
+	border-radius: 50%;
+	background-color: red;
+	color: #fff;
+	font-weight: bold;
+	letter-spacing: 1px;
+	box-shadow: 0 20px darkred;
+	margin-top: 0;
+	margin-bottom: 0;
+	transition: box-shadow 0.1s, margin-top 0.1s, margin-bottom 0.1s;
+}
+
+a#search:active {
+	margin-top: 20px;
+	box-shadow: 0 0 darkred;
+	margin-bottom: -20px;
+}
+
 /* results */
 div.results {
-  padding: 50px 0;
+  padding-top: 50px;
 }
 
 div.results > a.name {
@@ -242,10 +264,18 @@ div.results > p {
 /*HOME LINK*/
 nav.home {
   width: 1000px;
-  margin: 50px auto;
+  margin: 0 auto;
 }
 
 nav.home > a {
   display: block;
   text-decoration: underline;
+}
+
+/* LOADING */
+div.loading {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
 }

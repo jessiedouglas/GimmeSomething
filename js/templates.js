@@ -135,9 +135,16 @@
   };
 
   GimmeSomething.pageNotFound = function () {
-    html = '<h1 class="not_found">404 NOT FOUND</h1>\
+    var html = '<h1 class="not_found">404 NOT FOUND</h1>\
             <p>Try something else!</p>';
 
     return html;
   };
+	
+	GimmeSomething.loadingTemplate = function () {
+		console.log("here")
+		var html = '<div class=loading>LOADING...</div>';
+
+		return html;
+	};
 })();

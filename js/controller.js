@@ -5,7 +5,7 @@
     this.$el = $(el);
 
     this.$el.on("click", "button#position", this.getCoords.bind(this));
-    this.$el.on("click", "#search", this.search.bind(this));
+    this.$el.on("mouseup", "#search", this.search.bind(this));
     this.$el.on("click", "#change_location", this.changeLocation.bind(this));
     this.$el.on("click", "a.why", this.whyTab.bind(this));
     this.$el.on("click", "a.acknowledgements", this.acknowledgementsTab.bind(this));
@@ -84,57 +84,107 @@
 
   GimmeSomething.Controller.prototype.search = function (event) {
     event.preventDefault();
+		
+		this.$el.find("a#search").remove();
+		this.$el.append(GimmeSomething.loadingTemplate());
 
     if (!this.coords) {
       this.getCoords();
     }
 
     setTimeout(function () {
-      var lat = this.coords.lat;
-      var lng = this.coords.lng;
-      var location = new google.maps.LatLng(lat, lng);
-      var keyword = GimmeSomething.router.routes["/" + GimmeSomething.currentRoute].searchTerm;
-
-      if (keyword === "bars") {
-        var types = ["bar", "food"];
-      } else if (keyword === "cafes") {
-        var types = ["cafe", "food"];
-      } else {
-        var types = ["restaurant", "food"];
-      }
-
-      var request = {
-        keyword: keyword,
-        location: location,
-        types: types,
-        opennow: true,
-        rankBy: google.maps.places.RankBy.DISTANCE
-      };
-
-      var node = document.getElementById("map_results");
-      var service = new google.maps.places.PlacesService(node);
-      service.nearbySearch(request, this.parseSearch.bind(this));
+     	this.googleNearbySearch("distance", this.prominenceSearch);
     }.bind(this), 20);
   };
+	
+	GimmeSomething.Controller.prototype.prominenceSearch = function (resp, status) {
+		this.distanceResults = resp;
+		
+		this.googleNearbySearch("prominence", this.parseSearch);
+	};
 
+	GimmeSomething.Controller.prototype.googleNearbySearch = function (rankType, callback) {
+    var lat = this.coords.lat;
+    var lng = this.coords.lng;
+    var location = new google.maps.LatLng(lat, lng);
+    var keyword = GimmeSomething.router.routes["/" + GimmeSomething.currentRoute].searchTerm;
+
+    if (keyword === "bars") {
+      var types = ["bar", "food"];
+    } else if (keyword === "cafes") {
+      var types = ["cafe", "food"];
+    } else {
+      var types = ["restaurant", "food"];
+    }
+		
+		if (rankType === "distance") {
+	    var request = {
+	      keyword: keyword,
+	      location: location,
+	      types: types,
+	      opennow: true,
+	      rankBy: google.maps.places.RankBy.DISTANCE
+	    };
+		} else {
+	    var request = {
+	      keyword: keyword,
+	      location: location,
+	      types: types,
+	      opennow: true,
+	      rankBy: google.maps.places.RankBy.PROMINENCE,
+				radius: 2000
+	    };
+		}
+
+    var node = document.getElementById("map_results");
+    var service = new google.maps.places.PlacesService(node);
+    service.nearbySearch(request, callback.bind(this));
+	};
+	
   GimmeSomething.Controller.prototype.parseSearch = function (resp, status) {
-    if (resp.length === 0) {
+		var prominenceResults = resp;
+		var restaurant;
+		
+    if (this.distanceResults.length === 0 && prominenceResults.length === 0) {
       var html = '<div class="results">\
                   <p>There are no open locations near you :(</p>\
                   </div>';
 
-      this.$el.find("a#search").remove();
+      this.$el.find("div.loading").remove();
       this.$el.append(html);
       return;
+    } else if (prominenceResults.length === 0) {
+    	restaurant = this.distanceResults[0]
+    } else {
+			var prominenceObj = this.hashifyProminence(prominenceResults);
+			
+			for (var i = 0; i < this.distanceResults.length; i++) {
+				if ( !restaurant && prominenceObj[this.distanceResults[i].name] ) {
+					restaurant = this.distanceResults[i];
+				}
+			};
+			
+			if (!restaurant) {
+				restaurant = prominenceResults[0];
+			}
     }
 
     var info = {
-      name: resp[0].name,
-      id: resp[0].place_id
+      name: restaurant.name,
+      id: restaurant.place_id
     };
 
     this.renderSearch(info);
   };
+	
+	GimmeSomething.Controller.prototype.hashifyProminence = function (results) {
+		var hash = {};
+		results.forEach(function (el) {
+			hash[el.name] = true;
+		});
+		
+		return hash;
+	};
 
   GimmeSomething.Controller.prototype.renderSearch = function (info) {
     var name = info.name;
@@ -157,7 +207,7 @@
         var results = {};
       }
 
-      this.$el.find("a#search").remove();
+      this.$el.find("div.loading").remove();
       this.$el.append(GimmeSomething.searchResultsTemplate(name, results));
     }.bind(this));
   };
